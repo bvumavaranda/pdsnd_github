@@ -1,4 +1,6 @@
-/*Question 1*/
+/Refactored/
+
+/*Question A*/
 
 SELECT f.title AS "Film Title", c.name AS "Category Name", Count(rental_date) 	AS "Rental Count"
 FROM category c
@@ -16,7 +18,7 @@ ORDER BY 2
 
 
 
-/*Question 2*/
+/*Question B*/
 
 SELECT film_title AS "Film Title", category_name AS "Category Name", 		rental_len AS "Rental Length", Ntile(4) OVER (ORDER BY rental_len) AS 		"Quartile"
 FROM 
@@ -34,7 +36,7 @@ FROM
 
   
 
-/*Question 3*/
+/*Question C*/
 
 SELECT t2.category_name AS "Category", t2.standard_quartile AS "Quartile", 		COUNT(film_title) AS "Frequency"
 FROM
@@ -55,7 +57,7 @@ GROUP BY 1, 2
 ORDER BY 3
 
 
- /*Question 4*/
+ /*Question D*/
 
 WITH t2 AS (SELECT c.customer_id id, c.first_name, c.last_name, 		c.first_name||' '||c.last_name AS full_name
 	FROM customer c),
@@ -69,5 +71,5 @@ FROM t2
 JOIN t1
 ON t1.id=t2.id
 
-    
+
 
