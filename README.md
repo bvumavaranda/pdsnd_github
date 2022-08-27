@@ -11,6 +11,7 @@ The project analyses an SQL database to identify the characteristics of renters 
 
 ### Files used
 Queries.txt
+.gitignore
 
 
 
