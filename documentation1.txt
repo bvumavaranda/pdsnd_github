@@ -1,0 +1,74 @@
+Testing documentation changes 1
+
+/*Question A*/
+
+SELECT f.title AS "Film Title", c.name AS "Category Name", Count(rental_date) 	AS "Rental Count"
+FROM category c
+JOIN film_category fc
+ON c.category_id=fc.category_id
+JOIN film f
+ON f.film_id=fc.film_id
+JOIN inventory i
+ON i.film_id=f.film_id
+JOIN rental r
+ON r.inventory_id=i.inventory_id
+WHERE c.name IN ('Animation','Children','Classics', 'Comedy','Family', 	'Music')
+GROUP BY 1, 2
+ORDER BY 2 
+
+
+
+/*Question B*/
+
+SELECT film_title AS "Film Title", category_name AS "Category Name", 		rental_len AS "Rental Length", Ntile(4) OVER (ORDER BY rental_len) AS 		"Quartile"
+FROM 
+    (SELECT f.title film_title, c.name 	category_name, f.rental_duration 		rental_len
+    FROM category c
+    JOIN film_category fc
+    ON c.category_id=fc.category_id
+    JOIN film f
+    ON f.film_id=fc.film_id
+    JOIN inventory i
+    ON i.film_id=f.film_id
+    JOIN rental r
+    ON r.inventory_id=i.inventory_id
+   	) t1
+
+  
+
+/*Question C*/
+
+SELECT t2.category_name AS "Category", t2.standard_quartile AS "Quartile", 		COUNT(film_title) AS "Frequency"
+FROM
+	(SELECT film_title, category_name, rental_len, Ntile(4) OVER (ORDER BY 	rental_len) AS standard_quartile
+	FROM 
+    	(SELECT f.title film_title, c.name 	category_name, 			f.rental_duration rental_len
+   	 FROM category c
+    	JOIN film_category fc
+    	ON c.category_id=fc.category_id
+    	JOIN film f
+    	ON f.film_id=fc.film_id
+    	JOIN inventory i
+    	ON i.film_id=f.film_id
+    	JOIN rental r
+    	ON r.inventory_id=i.inventory_id
+  	 ) t1) t2
+GROUP BY 1, 2
+ORDER BY 3
+
+
+ /*Question D*/
+
+WITH t2 AS (SELECT c.customer_id id, c.first_name, c.last_name, 		c.first_name||' '||c.last_name AS full_name
+	FROM customer c),
+
+t1 AS (SELECT p.customer_id id, p.payment_date payment, SUM(p.amount) total
+	FROM payment p
+	GROUP BY 1, 2) 
+
+SELECT t2.full_name AS "Full Name", t1.payment AS "Payment Date", t1.total AS 	"Total Paid"
+FROM t2
+JOIN t1
+ON t1.id=t2.id
+
+
