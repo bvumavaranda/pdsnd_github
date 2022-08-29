@@ -68,6 +68,6 @@ SELECT t2.full_name AS "Full Name", t1.payment AS "Payment Date", t1.total AS 	"
 FROM t2
 JOIN t1
 ON t1.id=t2.id
-
+ 
     
 
