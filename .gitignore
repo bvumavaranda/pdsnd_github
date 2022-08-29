@@ -1,8 +1,12 @@
-<<<<<<< HEAD
+ documentation2
+ HEAD
 *.csv
 ||||||| 54458ac
 .github/**
 =======
 .github/**
 *.csv
->>>>>>> e1097b82fd506f923dcb6b8b9e86d6c15bf88f66
+ e1097b82fd506f923dcb6b8b9e86d6c15bf88f66
+=======
+*.csv
+ master
