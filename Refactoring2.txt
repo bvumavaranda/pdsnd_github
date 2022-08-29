@@ -71,5 +71,5 @@ FROM t2
 JOIN t1
 ON t1.id=t2.id
 
-
+ 
 
